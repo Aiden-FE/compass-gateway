@@ -7,7 +7,7 @@ export interface IMicroServiceTCP {
 }
 
 export interface IMicroServices {
-  [serviceName: string]: ClientProxy & Closeable;
+  [serviceName: string]: (ClientProxy & Closeable) | undefined;
 }
 
 export interface IEnvConfig {

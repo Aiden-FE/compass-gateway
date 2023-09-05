@@ -1,4 +1,6 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Delete, Get, Patch, Post, Put, Req, Res, HttpStatus } from '@nestjs/common';
+import { FastifyReply, FastifyRequest } from 'fastify';
+import { firstValueFrom } from 'rxjs';
 import { AppService } from './app.service';
 
 @Controller()
@@ -10,12 +12,26 @@ export class AppController {
     return this.appService.pingAllServices();
   }
 
-  /**
-   * @todo
-   * 1. 接收所有未捕获的请求
-   * 2. 根据首位路径决定要调用的服务
-   * 3. 不存在的服务返回404
-   * 4. 转发请求给目标服务处理,携带其他路径信息,查询参数以及body请求体
-   */
-  dispatchTask() {}
+  @Get('*')
+  @Post('*')
+  @Put('*')
+  @Delete('*')
+  @Patch('*')
+  async dispatchTask(@Req() req: FastifyRequest, @Res() res: FastifyReply) {
+    const paths = req.url.split('/');
+    const targetService = paths[1];
+    const client = this.appService.getMicroServiceByName(targetService);
+    if (!client) {
+      res.status(HttpStatus.NOT_FOUND).send('Not found service');
+      return;
+    }
+    const cmd = `/${paths.slice(2, paths.length).join('/')}`;
+    const result = await firstValueFrom(
+      client.send(cmd, {
+        query: req.query,
+        body: req.body,
+      }),
+    );
+    res.status(HttpStatus.OK).send(result);
+  }
 }
