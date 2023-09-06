@@ -18,15 +18,6 @@
       "compilerOptions": {
         "tsConfigPath": "apps/gateway/tsconfig.app.json"
       }
-    },
-    "rbac": {
-      "type": "application",
-      "root": "apps/rbac",
-      "entryFile": "main",
-      "sourceRoot": "apps/rbac/src",
-      "compilerOptions": {
-        "tsConfigPath": "apps/rbac/tsconfig.app.json"
-      }
     }
   }
 }

@@ -22,8 +22,7 @@ export class AppController {
     const targetService = paths[1];
     const client = this.appService.getMicroServiceByName(targetService);
     if (!client) {
-      res.status(HttpStatus.NOT_FOUND).send('Not found service');
-      return;
+      return res.status(HttpStatus.NOT_FOUND).send('Not found service');
     }
     const cmd = `/${paths.slice(2, paths.length).join('/')}`;
     const result = await firstValueFrom(
@@ -32,6 +31,6 @@ export class AppController {
         body: req.body,
       }),
     );
-    res.status(HttpStatus.OK).send(result);
+    return res.status(HttpStatus.OK).send(result);
   }
 }
