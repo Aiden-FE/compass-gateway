@@ -1,6 +1,0 @@
-# 声明微服务
-#microServices:
-#  rbac:
-#    transport: 0 # 可选,默认 Transport.TCP 连接
-#    host: 0.0.0.0 # 可选,设置为0.0.0.0可接受其他主机请求
-#    port: 3010 # TCP微服务端口号
