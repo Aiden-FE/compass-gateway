@@ -1,4 +1,4 @@
-import { Controller, Delete, Get, Patch, Post, Put, Req, Res, HttpStatus } from '@nestjs/common';
+import { Controller, Get, Req, Res, HttpStatus, All } from '@nestjs/common';
 import { FastifyReply, FastifyRequest } from 'fastify';
 import { firstValueFrom } from 'rxjs';
 import { AppService } from './app.service';
@@ -12,11 +12,7 @@ export class AppController {
     return this.appService.pingAllServices();
   }
 
-  @Get('*')
-  @Post('*')
-  @Put('*')
-  @Delete('*')
-  @Patch('*')
+  @All('*')
   async dispatchTask(@Req() req: FastifyRequest, @Res() res: FastifyReply) {
     const paths = req.url.split('/');
     const targetService = paths[1];
