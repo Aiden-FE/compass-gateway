@@ -9,7 +9,7 @@
     "build": "nest build",
     "format": "prettier --write \"apps/**/*.ts\" \"shared/**/*.ts\"",
     "start": "nest start",
-    "dev": "NODE_ENV=development nest start --watch",
+    "start:dev": "NODE_ENV=development nest start --watch",
     "start:debug": "nest start --debug --watch",
     "start:prod": "sh start.sh",
     "lint": "eslint \"{src,apps,libs,test,shared}/**/*.ts\" --fix",

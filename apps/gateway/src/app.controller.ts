@@ -20,12 +20,18 @@ export class AppController {
     if (!client) {
       return res.status(HttpStatus.NOT_FOUND).send('Not found service');
     }
-    const cmd = `/${paths.slice(2, paths.length).join('/')}`;
+    const url = `/${paths.slice(2, paths.length).join('/')}`;
     const result = await firstValueFrom(
-      client.send(cmd, {
-        query: req.query,
-        body: req.body,
-      }),
+      client.send(
+        {
+          url,
+          method: req.method,
+        },
+        {
+          query: req.query,
+          body: req.body,
+        },
+      ),
     );
     return res.status(HttpStatus.OK).send(result);
   }
