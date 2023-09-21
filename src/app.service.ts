@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { IMicroServices } from '@shared/interfaces';
 import { firstValueFrom } from 'rxjs';
 import { MICRO_SERVICES_PROVIDE_KEY } from './config';
+import { IMicroServices } from './interfaces';
 
 @Injectable()
 export class AppService {
@@ -10,7 +10,19 @@ export class AppService {
   async pingAllServices() {
     const promiseAll: Promise<any>[] = [];
     Object.values(this.microService).forEach((service) => {
-      promiseAll.push(firstValueFrom(service.send('/ping', {})));
+      if (service) {
+        promiseAll.push(
+          firstValueFrom(
+            service.send(
+              {
+                url: '/ping',
+                method: 'GET',
+              },
+              {},
+            ),
+          ),
+        );
+      }
     });
     await Promise.all(promiseAll);
     return 'ok';

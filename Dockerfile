@@ -3,7 +3,7 @@ MAINTAINER Aiden_FE <Aiden_FE@outlook.com>
 
 ENV NODE_ENV production
 
-ARG WORKDIR_DIR=/root/compass-gateway
+ARG WORKDIR_DIR=/root/compass-service
 
 ARG EXPOSE=3000
 
@@ -15,4 +15,4 @@ COPY . ${WORKDIR_DIR}
 
 EXPOSE ${EXPOSE}
 
-CMD ["npm", "run", "start:prod"]
+CMD ["npm", "run", "start"]

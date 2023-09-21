@@ -1,12 +1,6 @@
 module.exports = {
   parserOptions: {
-    project: [
-      'tsconfig.json',
-      'tsconfig.*.json',
-      '**/tsconfig.*.json',
-    ],
-    tsconfigRootDir: __dirname,
-    sourceType: 'module',
+    project: 'tsconfig.json',
   },
   extends: [
     '@compass-aiden/eslint-config/nest',

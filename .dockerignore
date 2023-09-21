@@ -1,5 +1,7 @@
 node_modules
 apps
-shared
+src
+test
+libs
 .github
-config.*.yml
+.env
