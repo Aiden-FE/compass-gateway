@@ -15,7 +15,6 @@ concurrency:
   group: 'deploy'
   cancel-in-progress: false
 
-
 jobs:
   # Build job
   build-and-deploy:
@@ -79,5 +78,5 @@ jobs:
           context: .
           push: true
           tags: |
-            ${{ vars.DOCKERHUB_USERNAME }}/compass-gateway:latest
-            ${{ vars.DOCKERHUB_USERNAME }}/compass-gateway:${{ env.VERSION }}
+            ${{ vars.DOCKERHUB_USERNAME }}/${{ vars.DOCKERHUB_IMAGE_NAME }}:${{ env.VERSION }}
+            ${{ vars.DOCKERHUB_USERNAME }}/${{ vars.DOCKERHUB_IMAGE_NAME }}:latest

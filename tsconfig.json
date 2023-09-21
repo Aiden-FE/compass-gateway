@@ -12,17 +12,18 @@
     "baseUrl": "./",
     "incremental": true,
     "skipLibCheck": true,
-    "strictNullChecks": false,
+    "strictNullChecks": true,
     "noImplicitAny": false,
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
+    "resolveJsonModule": true,
     "paths": {
-      "@shared": [
-        "shared"
+      "@app/common": [
+        "libs/common/src"
       ],
-      "@shared/*": [
-        "shared/*"
+      "@app/common/*": [
+        "libs/common/src/*"
       ]
     }
   }
