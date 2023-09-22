@@ -20,7 +20,11 @@ export class AppController {
     const targetService = paths[1];
     const client = this.appService.getMicroServiceByName(targetService);
     if (!client) {
-      return res.status(HttpStatus.NOT_FOUND).send('Not found service');
+      return res.status(HttpStatus.NOT_FOUND).send({
+        statusCode: 100404,
+        data: null,
+        message: 'Not found service',
+      });
     }
     const url = `/${paths.slice(2, paths.length).join('/')}`;
     let result: MicroServicesResponse;
@@ -29,7 +33,7 @@ export class AppController {
         client.send(
           {
             url,
-            method: req.method,
+            method: req.method.toLocaleUpperCase(),
           },
           {
             headers: req.headers,
