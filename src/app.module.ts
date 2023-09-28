@@ -1,6 +1,6 @@
 import { Logger, Module } from '@nestjs/common';
-import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
-import { getEnvConfig, resolve } from '@app/common';
+import { ThrottlerModule } from '@nestjs/throttler';
+import { getEnvConfig, resolve, ThrottlerBehindProxyGuard } from '@app/common';
 import { APP_GUARD } from '@nestjs/core';
 import { ClientProxyFactory } from '@nestjs/microservices';
 import { readFileSync } from 'fs';
@@ -26,7 +26,7 @@ import { IMicroServices, IMicroServicesConfig } from './interfaces';
     AppService,
     {
       provide: APP_GUARD,
-      useClass: ThrottlerGuard,
+      useClass: ThrottlerBehindProxyGuard,
     },
     {
       provide: MICRO_SERVICES_PROVIDE_KEY,

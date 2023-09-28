@@ -10,6 +10,7 @@ async function bootstrap() {
     AppModule,
     new FastifyAdapter({
       logger: true,
+      trustProxy: true,
     }),
   );
   app.useGlobalPipes(
