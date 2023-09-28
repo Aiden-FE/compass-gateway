@@ -29,6 +29,27 @@ export class AppController {
     const url = `/${paths.slice(2, paths.length).join('/')}`;
     let result: MicroServicesResponse;
     try {
+      let user: any = null;
+      if (req.headers?.authorization) {
+        const rbacClient = this.appService.getMicroServiceByName('rbac');
+        if (rbacClient) {
+          const resp = await firstValueFrom(
+            rbacClient.send(
+              { url: '/oauth/user-info', method: 'GET' },
+              {
+                headers: req.headers,
+                query: req.query,
+                body: req.body,
+                ip: req.ip,
+                ips: req.ips,
+              },
+            ),
+          );
+          if (resp.response?.statusCode === 100200) {
+            user = resp.response.data;
+          }
+        }
+      }
       result = await firstValueFrom(
         client.send(
           {
@@ -41,6 +62,7 @@ export class AppController {
             body: req.body,
             ip: req.ip,
             ips: req.ips,
+            user,
           },
         ),
       );
